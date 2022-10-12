@@ -42,7 +42,7 @@ const playAndPauseIcon =()=>{
               <>
                 <div
                   key={songs.id}
-                  className=" w-full flex lg:px-5  cursor-pointer "
+                  className=" w-full flex lg:px-5  cursor-pointer justify-center "
                   onClick={() => { sendAudio(songs.id); playAndPauseIcon();}}
                   // onClick={() => sendAudio(songs.id)}
                 >
@@ -58,8 +58,8 @@ const playAndPauseIcon =()=>{
                         </IconButton>
                   </div> */}
                   <div className="w-[70vw] playlist70vw relative  lg:w-[70vw] bg-[#8080802e]">
-                    <p className="font-bold text-[12px]">{songs.title}</p>
-                    <p className="text-[10px]">{songs.artistName}</p>
+                    <p className="font-bold text-[12px] lg:p-1">{songs.title}</p>
+                    <p className="text-[10px] lg:p-1">{songs.artistName}</p>
                   </div>
                 </div>
               </>
