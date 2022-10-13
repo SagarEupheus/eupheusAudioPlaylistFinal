@@ -130,8 +130,11 @@ export const audioSlice = createSlice({
       ],
     currentAudio: [{
 
-      fileUrl:
-        '',
+      id:"",
+          title: '',
+          artistName: '',
+          albumTitle: "",
+          fileUrl: ""
     }],
   },
   reducers: {
