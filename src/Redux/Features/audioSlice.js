@@ -136,6 +136,10 @@ export const audioSlice = createSlice({
           albumTitle: "",
           fileUrl: ""
     }],
+    currentAudioId: [{
+
+      id:"",
+    }],
   },
   reducers: {
     audioActions: (state, action) => {

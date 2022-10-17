@@ -55,3 +55,7 @@ audio::-webkit-media-controls-mute-button {
         top: 0px;
     }
 }
+
+.rhap_stacked .rhap_controls-section {
+    margin-top: 2px;
+}

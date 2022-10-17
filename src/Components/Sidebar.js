@@ -42,7 +42,7 @@ const Sidebar = ({ state, toggle }) => {
 				</a> */}
 
             <div className="sideData  ml-[10px] mt-[30px]">
-              <span className="text-gray-50 text-[10px] lg:text-[12px] font-[400]">
+              <span className="text-gray-50 text-[10px] lg:text-[12px] font-[600]">
                 PROFICIENCY LEARNING <br />
                 SOLUTIONS PRIVATE LIMITED
               </span>
