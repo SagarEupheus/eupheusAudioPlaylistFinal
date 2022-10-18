@@ -5,9 +5,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Footer from "./Components/Footer";
 import Home from "./Pages/Home";
 // import { GiHamburgerMenu } from "react-icons/gi";
-import { useRef, useState } from "react";
+import { createContext, useRef, useState } from "react";
 import { FaBars, FaHamburger } from "react-icons/fa";
-import Playlist from "./Pages/Playlist";
+import Playlist, { ContextIconsPlay } from "./Pages/Playlist";
+// import { AudioProvider } from "./Pages/context";
+export const AudioContext = createContext()
 
 function App() {
   const [sidebarshow, setShowsidebar] = useState(false);
@@ -16,28 +18,31 @@ function App() {
     setShowsidebar(status);
   };
 
-  const playlistRef = useRef();
+  // const playlistRef = useRef();
 
 
   return (
     <>
-      <BrowserRouter>
-        <div className="main flex relative ">
-          <Sidebar state={sidebarshow} toggle={toggle} />
-          <Routes>
-            {/* <Route path="/" element={<Home />}></Route> */}
-            <Route path="/" element={<Playlist ref={playlistRef} />}></Route>
-          </Routes>
-        </div>
-        <FaBars
-          style={{ marginLeft: "auto" }}
-          className="lg:hidden md:hidden absolute top-4 left-4 text-[#530790]"
-          onClick={toggle}
-        />
-        <Footer />
-      </BrowserRouter>
+      <AudioContext.Provider value="demo">
+        <BrowserRouter>
+          <div className="main flex relative ">
+            <Sidebar state={sidebarshow} toggle={toggle} />
+            <Routes>
+              {/* <Route path="/" element={<Home />}></Route> */}
+              <Route path="/" element={<Playlist />}></Route>
+            </Routes>
+          </div>
+          <FaBars
+            style={{ marginLeft: "auto" }}
+            className="lg:hidden md:hidden absolute top-4 left-4 text-[#530790]"
+            onClick={toggle}
+          />
+          <Footer />
+        </BrowserRouter>
+      </AudioContext.Provider>
     </>
   );
 }
 
 export default App;
+
