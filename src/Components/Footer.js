@@ -2,13 +2,15 @@ import React, { useContext, useEffect, useState } from "react";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import { useDispatch, useSelector } from "react-redux";
-import { AudioContext, ContextIconsPlay } from "../Pages/Playlist";
+// import { AudioContext } from "../Pages/Playlist";
+import { AudioContext } from "../App";
 import { audioActions } from "../Redux/Features/audioSlice";
 import "./footer.css";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import { BsPlayCircleFill } from "react-icons/bs";
+import { Tooltip } from "@mui/material";
 
-const Footer = () => {
+const Footer = ({changePlay}) => {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state.audio.currentAudio);
   // const selectorId =useSelector((state)=> state.audio.currentAudioId)
@@ -36,31 +38,33 @@ const Footer = () => {
     // console.log("helleo")
     // setIndex(index + 1)
     const nextAudio = AllAudios.find(
-      (audio) => Number(audio.id) === Number(selector[0].id) + 1
+      (audio) => Number(audio.id) === Number(selector[0].id) + 1 
     );
     sendAudio(nextAudio.id);
   };
 
   const onPlayFunc = (idofplay) => {
     console.log(idofplay + " play");
+    changePlay(true)
     // dispatch(audioActions(idofplay));
   };
   const onPauseFunc = (idofpause) => {
     console.log(idofpause + " pause");
+    changePlay(false)
     // dispatch(audioActions( idofpause));
   };
 
-  const [playState, setplaystate] = useState(false);
+  // const [playState, setplaystate] = useState(false);
 
   // togglePlaystate function
   const togglePlaystate = () => {
-    console.log(playState + "gfhjdfs");
-    setplaystate(!playState);
-  };
+    // console.log(playState + "gfhjdfs");
+      // setplaystate(!playState);
+    };
 
-  const audio = useContext(AudioContext);
+  // const audio = useContext(AudioContext);
 
-  console.log(audio + "demo");
+  // console.log(audio + " working context");
 
   const playAll = (id) => {
     // const playallBtnAudio = AllAudios.find(
@@ -77,15 +81,16 @@ const Footer = () => {
   return (
     <>
       {/* play all icons */}
-      <div className="playallBtn fixed right-0 w-[50px] h-[50px]  bottom-[125px] z-50  ">
-      
+      <Tooltip title="Play All" >
+      <div className="playallBtn rounded-full fixed right-[27px] w-[50px] h-[50px] bg-white bottom-[152px] z-50  ">
           <BsPlayCircleFill
             className="text-[#0069FF] fixed  circle cursor-pointer w-[50px] h-[50px] bottom-[152px] right-[27px]"
             onClick={() => {
               playAll(1);
             }}
-          ></BsPlayCircleFill>
+            ></BsPlayCircleFill>
         </div>
+            </Tooltip>
       {/* play all icons */}
 
       <div className=" h-[12vh] absolute bottom-0 w-full footermain  ">

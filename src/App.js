@@ -8,22 +8,30 @@ import Home from "./Pages/Home";
 import { createContext, useRef, useState } from "react";
 import { FaBars, FaHamburger } from "react-icons/fa";
 import Playlist, { ContextIconsPlay } from "./Pages/Playlist";
-// import { AudioProvider } from "./Pages/context";
-export const AudioContext = createContext()
+import AudioProvider  from "./Context/DataProvider";
+
+
+
 
 function App() {
   const [sidebarshow, setShowsidebar] = useState(false);
+  const [play, setPlay] = useState(true)
+  
 
   const toggle = (status) => {
     setShowsidebar(status);
   };
+
+  const changePlay = (status) => {
+    setPlay(status)
+  }
 
   // const playlistRef = useRef();
 
 
   return (
     <>
-      <AudioContext.Provider value="demo">
+      <AudioProvider >
         <BrowserRouter>
           <div className="main flex relative ">
             <Sidebar state={sidebarshow} toggle={toggle} />
@@ -37,9 +45,9 @@ function App() {
             className="lg:hidden md:hidden absolute top-4 left-4 text-[#530790]"
             onClick={toggle}
           />
-          <Footer />
+          <Footer changePlay={changePlay}/>
         </BrowserRouter>
-      </AudioContext.Provider>
+      </AudioProvider>
     </>
   );
 }

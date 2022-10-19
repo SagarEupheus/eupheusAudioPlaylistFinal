@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import IconButton from "@mui/material/IconButton";
 import { BsPauseCircleFill, BsPlay } from "react-icons/bs";
@@ -9,12 +9,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { audioActions } from "../Redux/Features/audioSlice";
 // import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 
+
+import { DataContext } from "../Context/DataProvider";
+
+
 // console.log(SongList)
 // export const ContextIconsPlay = createContext();
-export const AudioContext = React.createContext();
+// export const AudioContext = React.createContext();
 
-const Playlist = () => {
+const Playlist = ({value}) => {
+//  context 
+const { iconss,setIconsToggle} = useContext(DataContext)
+// const [toggleicons, settoggleIcons] = useState(iconss);
+
+console.log(iconss+" demo is working")
+
   const dispatch = useDispatch();
+  console.log(value);
 
   const matchedIcons = useSelector((state) => state.audio.currentAudio);
 
@@ -28,6 +39,7 @@ const Playlist = () => {
   const [songList, setSongsList] = useState(SongList);
   const [icons, setIcons] = useState(false);
 
+
   const sendAudio = (id) => {
     const i = songList.find((song) => song.id == id);
     // console.log(i);
@@ -40,7 +52,13 @@ const Playlist = () => {
   //   dispatch(audioActions(songsId,state))
   // }
 
-  // Create Context
+  // chnageIcons status
+
+  const changeStatus =() =>{
+    // settoggleIcons(!toggleicons)
+    // const toggle = () => setIsOpen(!isOpen );
+    setIconsToggle(!iconss)
+  }
 
 
   return (
@@ -59,6 +77,7 @@ const Playlist = () => {
                     // onClick={() => { sendAudio(songs.id); playAndPauseIconSongs(songs.id);}}
                     onClick={() => {
                       sendAudio(songs.id);
+                      changeStatus()
                     }}
                   >
                     <div className="w-[20vw] flex playlistw lg:w-[10vw] md:w-[10vw] playlist20vw  pr-[10px]  justify-center items-center center bg-[#8080802e]">
@@ -68,7 +87,12 @@ const Playlist = () => {
                         color="primary"
                         aria-label="add to shopping cart"
                       >
-                        {matched == songs.id ? (
+                        {/* {matched == songs.id ? (
+                          <BsPauseCircleFill />
+                        ) : (
+                          <PlayCircleOutlineIcon />
+                        )} */}
+                        {iconss && matched == songs.id ? (
                           <BsPauseCircleFill />
                         ) : (
                           <PlayCircleOutlineIcon />
