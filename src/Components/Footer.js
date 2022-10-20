@@ -9,8 +9,9 @@ import "./footer.css";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import { BsPlayCircleFill } from "react-icons/bs";
 import { Tooltip } from "@mui/material";
+import { changing_true_Func, changing_false_Func } from '../Redux/changeIconState/changeIconApiCall'
 
-const Footer = ({changePlay}) => {
+const Footer = ({ changePlay }) => {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state.audio.currentAudio);
   // const selectorId =useSelector((state)=> state.audio.currentAudioId)
@@ -25,8 +26,6 @@ const Footer = ({changePlay}) => {
     dispatch(audioActions(i));
   };
 
-  console.log(current);
-
   const previousSong = () => {
     const previousSong = AllAudios.find(
       (audio) => Number(audio.id) === Number(selector[0].id) - 1
@@ -35,21 +34,20 @@ const Footer = ({changePlay}) => {
   };
 
   const ended = () => {
-    // console.log("helleo")
     // setIndex(index + 1)
     const nextAudio = AllAudios.find(
-      (audio) => Number(audio.id) === Number(selector[0].id) + 1 
+      (audio) => Number(audio.id) === Number(selector[0].id) + 1
     );
     sendAudio(nextAudio.id);
   };
 
   const onPlayFunc = (idofplay) => {
-    console.log(idofplay + " play");
+    dispatch(changing_true_Func())
     changePlay(true)
     // dispatch(audioActions(idofplay));
   };
   const onPauseFunc = (idofpause) => {
-    console.log(idofpause + " pause");
+    dispatch(changing_false_Func())
     changePlay(false)
     // dispatch(audioActions( idofpause));
   };
@@ -58,13 +56,11 @@ const Footer = ({changePlay}) => {
 
   // togglePlaystate function
   const togglePlaystate = () => {
-    // console.log(playState + "gfhjdfs");
-      // setplaystate(!playState);
-    };
+    // setplaystate(!playState);
+  };
 
   // const audio = useContext(AudioContext);
 
-  // console.log(audio + " working context");
 
   const playAll = (id) => {
     // const playallBtnAudio = AllAudios.find(
@@ -82,15 +78,15 @@ const Footer = ({changePlay}) => {
     <>
       {/* play all icons */}
       <Tooltip title="Play All" >
-      <div className="playallBtn rounded-full fixed right-[27px] w-[50px] h-[50px] bg-white bottom-[152px] z-50  ">
+        <div className="playallBtn rounded-full fixed right-[27px] w-[50px] h-[50px] bg-white bottom-[152px] z-50  ">
           <BsPlayCircleFill
             className="text-[#0069FF] fixed  circle cursor-pointer w-[50px] h-[50px] bottom-[152px] right-[27px]"
             onClick={() => {
               playAll(1);
             }}
-            ></BsPlayCircleFill>
+          ></BsPlayCircleFill>
         </div>
-            </Tooltip>
+      </Tooltip>
       {/* play all icons */}
 
       <div className=" h-[12vh] absolute bottom-0 w-full footermain  ">

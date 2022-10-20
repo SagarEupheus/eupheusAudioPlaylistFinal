@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 // import data from "../../Pages/Data";
 
-// console.log(data+"ashdkajhdajhdahdjkhajk")
 
 export const audioSlice = createSlice({
   name: 'audio',
