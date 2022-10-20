@@ -1,7 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import audioReducer from "../Redux/Features/audioSlice"
+import audioReducer from "../Redux/Features/audioSlice";
+import iconRedux from './changeIconState/changeIconRedux';
+
 export default configureStore({
   reducer: {
-    audio:audioReducer,
+    audio: audioReducer,
+    icns: iconRedux
   },
 });
