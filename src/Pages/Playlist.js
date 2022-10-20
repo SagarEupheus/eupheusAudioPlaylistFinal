@@ -8,6 +8,8 @@ import "./audio.css";
 import { useDispatch, useSelector } from "react-redux";
 import { audioActions } from "../Redux/Features/audioSlice";
 // import PlayCircleIcon from '@mui/icons-material/PlayCircle';
+import { changing2_true_Func, changing2_false_Func } from '../Redux/changeIconState/changeIconApiCall';
+
 
 
 import { DataContext } from "../Context/DataProvider";
@@ -52,7 +54,14 @@ const Playlist = ({ value }) => {
   const changeStatus = () => {
     // settoggleIcons(!toggleicons)
     // const toggle = () => setIsOpen(!isOpen );
-    setIconsToggle(!iconss)
+    setIconsToggle(!iconss);
+
+    if (iconss == false) {
+      dispatch(changing2_true_Func());
+    } else if (iconss == true) {
+      dispatch(changing2_false_Func());
+    }
+
   }
 
   const ply_value = useSelector((state) => state.icns.ply);
